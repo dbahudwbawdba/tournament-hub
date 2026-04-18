@@ -8,11 +8,10 @@ module.exports = {
     extend: {
       colors: {
         siege: {
-          dark: '#0e1015',
-          card: '#161920',
-          accent: '#c4a77d',
+          dark: '#0a0a0a',
+          card: '#121212',
+          accent: '#ffa500', // Jynxzi Oranje/Goud
           blue: '#5865F2',
-          'blue-hover': '#4752C4', 
         },
       },
     },

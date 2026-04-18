@@ -10,8 +10,8 @@
             background: radial-gradient(circle at center, #0f0f1a 0%, #050505 100%);
             color: white; 
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            min-h-screen;
+            margin: 0;
+            min-height: 100vh;
         }
         .text-gradient { 
             background: linear-gradient(to right, #3b82f6, #a855f7); 
@@ -20,103 +20,94 @@
         }
         .bg-gradient-custom { background: linear-gradient(135deg, #3b82f6, #a855f7); }
         
-        /* Animatie voor content die verschijnt */
+        /* Fix voor afgesneden tekst en schaling */
+        .hero-title {
+            line-height: 0.9;
+            letter-spacing: -0.05em;
+        }
+
         .page-content {
             display: none;
-            animation: contentPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease-out;
         }
-        @keyframes contentPop {
-            from { opacity: 0; transform: scale(0.98) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        .page-content.active {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
         }
-        .active { display: block; }
 
-        /* Kaart styling zoals in screenshot 2 */
-        .tourney-card {
-            background: #111111;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-        .tourney-card:hover {
-            border-color: rgba(168, 85, 247, 0.4);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .nav-item {
+            font-size: 14px; /* Groter dan voorheen */
+            letter-spacing: 0.1em;
+            transition: all 0.3s;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
+<body class="flex flex-col">
 
-    <nav class="border-b border-white/5 bg-black/60 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-gradient-custom rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/20">
-                    <span class="font-black text-xs">R6</span>
+    <nav class="border-b border-white/5 bg-black/40 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-10 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-gradient-custom rounded-xl flex items-center justify-center shadow-lg">
+                    <span class="font-black text-sm">R6</span>
                 </div>
-                <span class="font-black tracking-tighter uppercase italic text-lg">R6 Tourney <span class="text-gradient">Hub</span></span>
+                <span class="font-black text-2xl uppercase italic tracking-tighter">R6 Tourney <span class="text-gradient">Hub</span></span>
             </div>
 
-            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em]">
-                <button onclick="switchTab('home')" class="hover:text-purple-400 transition">Home</button>
-                <button onclick="switchTab('tournaments')" class="hover:text-purple-400 transition">Tournaments</button>
-                <button onclick="switchTab('leaderboard')" class="hover:text-purple-400 transition">Leaderboards</button>
-                <button onclick="switchTab('staff')" class="hover:text-purple-400 transition">Staff Panel</button>
+            <div class="hidden md:flex gap-12 font-black uppercase">
+                <button onclick="switchTab('home')" class="nav-item hover:text-purple-400">Home</button>
+                <button onclick="switchTab('tournaments')" class="nav-item hover:text-purple-400">Tournaments</button>
+                <button onclick="switchTab('leaderboard')" class="nav-item hover:text-purple-400">Leaderboards</button>
+                <button onclick="switchTab('staff')" class="nav-item hover:text-purple-400">Staff Panel</button>
             </div>
 
-            <button onclick="login()" class="bg-[#5865F2] hover:bg-[#4752c4] px-6 py-2.5 rounded-xl font-black text-[11px] uppercase transition-all transform hover:scale-105">Sign In</button>
+            <button onclick="login()" class="bg-[#5865F2] hover:bg-[#4752c4] px-8 py-3 rounded-2xl font-black text-sm uppercase transition-all transform hover:scale-105">Sign In</button>
         </div>
     </nav>
 
-    <main class="flex-grow flex items-center justify-center p-6">
+    <main class="flex-grow flex items-center justify-center px-6 py-12">
         
-        <div id="home" class="page-content active text-center">
-            <h1 class="text-8xl md:text-9xl font-black tracking-tighter uppercase mb-2 drop-shadow-2xl">SIEGE</h1>
-            <h1 class="text-6xl md:text-7xl font-black text-gradient uppercase italic mb-12">STATION HUB</h1>
-            <div class="flex gap-4 justify-center">
-                <button onclick="switchTab('tournaments')" class="bg-white text-black px-12 py-4 rounded-2xl font-black uppercase tracking-tighter hover:bg-gradient-custom hover:text-white transition-all transform hover:scale-105 shadow-2xl">View Tournaments</button>
-                <button onclick="login()" class="bg-white/5 border border-white/10 px-12 py-4 rounded-2xl font-black uppercase tracking-tighter hover:bg-white/10 transition">Discord Login</button>
+        <div id="home" class="page-content active flex-col items-center text-center">
+            <h1 class="hero-title text-[12vw] md:text-[10rem] font-black uppercase mb-2">SIEGE</h1>
+            <h1 class="hero-title text-[8vw] md:text-[7rem] font-black text-gradient uppercase italic mb-16">STATION HUB</h1>
+            <div class="flex flex-wrap gap-6 justify-center">
+                <button onclick="switchTab('tournaments')" class="bg-white text-black px-16 py-5 rounded-2xl font-black uppercase text-xl hover:bg-gradient-custom hover:text-white transition-all transform hover:scale-105 shadow-2xl">View Tournaments</button>
+                <button onclick="login()" class="bg-white/5 border border-white/10 px-16 py-5 rounded-2xl font-black uppercase text-xl hover:bg-white/10 transition">Discord Login</button>
             </div>
         </div>
 
-        <div id="tournaments" class="page-content w-full max-w-4xl">
-            <div class="flex items-center gap-4 mb-8">
-                <span class="text-3xl">🏆</span>
-                <div>
-                    <h2 class="text-4xl font-black uppercase italic leading-none">Tournaments</h2>
-                    <p class="text-gray-500 text-sm mt-1 uppercase font-bold tracking-widest">Browse and sign up for hub tournaments</p>
-                </div>
+        <div id="tournaments" class="page-content flex-col w-full max-w-6xl">
+            <div class="flex flex-col mb-12 border-l-4 border-purple-500 pl-8">
+                <h2 class="text-6xl font-black uppercase italic">Tournaments</h2>
+                <p class="text-gray-400 text-lg mt-2 uppercase font-bold tracking-[0.2em]">Browse and sign up for community tournaments</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-4">
-                <div class="tourney-card rounded-[1.5rem] p-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="grid grid-cols-1 gap-6">
+                <div class="bg-[#111] border border-white/5 rounded-[2.5rem] p-10 flex flex-col md:flex-row justify-between items-center gap-8 hover:border-purple-500/30 transition">
                     <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-2">
-                            <h3 class="text-2xl font-black uppercase">NA 2v2</h3>
-                            <span class="bg-emerald-500/10 text-emerald-500 text-[10px] font-black px-3 py-1 rounded-full border border-emerald-500/20">OPEN</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <h3 class="text-4xl font-black uppercase">NA 2v2</h3>
+                            <span class="bg-emerald-500/10 text-emerald-500 text-xs font-black px-4 py-1.5 rounded-full border border-emerald-500/20">OPEN</span>
                         </div>
-                        <div class="flex gap-6 text-gray-400 text-xs font-bold uppercase tracking-widest">
-                            <span class="flex items-center gap-2">🎮 2v2</span>
-                            <span class="flex items-center gap-2">👥 8/16 Teams</span>
-                            <span class="flex items-center gap-2">📅 20-4-2026</span>
+                        <div class="flex flex-wrap gap-8 text-gray-400 font-bold uppercase tracking-widest text-sm">
+                            <span>🎮 2v2</span>
+                            <span>👥 8/16 Teams</span>
+                            <span>📅 20-4-2026</span>
                         </div>
-                        <p class="text-[#ffa500] font-black text-sm mt-4 italic">🏆 Winners role and leaderboard</p>
+                        <p class="text-orange-500 font-black text-lg mt-6 italic">🏆 Winners role and leaderboard</p>
                     </div>
-                    <button onclick="register()" class="w-full md:w-auto bg-white/5 border border-white/10 hover:border-purple-500/50 px-8 py-4 rounded-xl font-black uppercase text-xs tracking-widest transition">
+                    <button onclick="register()" class="w-full md:w-auto bg-white/5 border border-white/10 hover:border-purple-500 hover:bg-purple-500/10 px-10 py-5 rounded-2xl font-black uppercase text-sm tracking-widest transition-all">
                         Sign in with Discord to register
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="leaderboard" class="page-content text-center">
-            <h2 class="text-5xl font-black text-gradient uppercase italic mb-4">Leaderboards</h2>
-            <div class="bg-[#111] border border-white/5 p-12 rounded-[3rem]">
-                <p class="text-gray-500 uppercase font-black tracking-[0.3em]">Season 1 Rankings Coming Soon</p>
-            </div>
-        </div>
-
-        <div id="staff" class="page-content text-center">
-            <h2 class="text-5xl font-black text-gradient uppercase italic">Staff Access</h2>
-            <p class="text-red-500/50 mt-4 uppercase font-black tracking-widest">Unauthorized Access Detected</p>
+        <div id="leaderboard" class="page-content flex-col items-center">
+            <h2 class="text-7xl font-black text-gradient uppercase italic">Leaderboards</h2>
+            <p class="text-gray-500 text-xl mt-8 font-black tracking-widest">Global Rankings Under Maintenance</p>
         </div>
 
     </main>
@@ -125,20 +116,26 @@
         let authenticated = false;
 
         function switchTab(tabId) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
+            const sections = document.querySelectorAll('.page-content');
+            sections.forEach(s => {
+                s.classList.remove('active');
+                s.style.display = 'none';
+            });
+            
+            const target = document.getElementById(tabId);
+            target.style.display = 'flex';
+            // Kleine timeout voor de animatie
+            setTimeout(() => target.classList.add('active'), 50);
         }
 
         function login() {
             authenticated = true;
-            alert("Redirecting to Discord OAuth...");
+            alert("Discord OAuth Triggered...");
         }
 
         function register() {
             if(!authenticated) {
-                alert("Please Sign In with Discord first to participate in this tournament.");
-            } else {
-                alert("Successfully registered for NA 2v2!");
+                alert("ACCESS DENIED: Sign in with Discord required.");
             }
         }
     </script>

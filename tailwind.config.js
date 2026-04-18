@@ -10,8 +10,7 @@ module.exports = {
         siege: {
           dark: '#0a0a0a',
           card: '#121212',
-          accent: '#ffa500', // Jynxzi Oranje/Goud
-          blue: '#5865F2',
+          accent: '#ffa500', // De oranje/goud kleur
         },
       },
     },

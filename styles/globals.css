@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  background-color: #0e1015;
-  color: white;
+  @apply bg-siege-dark text-white font-sans;
+  margin: 0;
 }

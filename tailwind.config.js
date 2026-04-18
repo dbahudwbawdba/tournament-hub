@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors: {
         'siege-accent': '#ffa500', // Het oranje van je logo
-        'siege-card': '#121212',   // De donkere kaarten
+        'siege-card': '#121212',   // De donkere achtergrond voor toernooien
       },
     },
   },

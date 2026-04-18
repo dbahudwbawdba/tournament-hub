@@ -7,8 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'siege-accent': '#ffa500', // Het oranje van je logo
-        'siege-card': '#121212',   // De donkere achtergrond voor toernooien
+        'siege-accent': '#ffa500', 
+        'siege-dark': '#0a0a0a',
+        'siege-card': '#121212',
       },
     },
   },

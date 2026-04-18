@@ -1,44 +1,123 @@
 import { useSession, signIn, signOut } from "next-auth/react";
 import Head from 'next/head';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
   const { data: session } = useSession();
+  const [activeTab, setActiveTab] = useState('Home');
+
+  // Voorbeelddata (Later ophalen uit DB)
+  const tournaments = [
+    { id: 1, title: "Open Cup #01", prize: "€100", category: "5v5Bomb", date: "2026-04-20" },
+    { id: 2, title: "Aim Lab 1v1", prize: "Skins", category: "1v1Aim", date: "2026-04-25" },
+  ];
+
+  // Navigatie-items
+  const navItems = ['Dashboard', 'Tournaments', 'Teams', 'Leaderboard', 'Staff'];
 
   return (
-    <div style={{ backgroundColor: '#0a0a0a', minHeight: '100vh', color: 'white', fontFamily: 'sans-serif' }}>
-      <Head><title>Siege Station | Home</title></Head>
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans antialiased overflow-hidden relative">
+      <Head><title>Siege Station | Professional competition Hub</title></Head>
 
-      <nav style={{ borderBottom: '1px solid #222', padding: '0 24px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'rgba(10,10,10,0.8)', backdropFilter: 'blur(10px)', position: 'sticky', top: 0, zIndex: 50 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <span style={{ color: '#ffa500', fontWeight: '900', fontSize: '20px' }}>SIEGE</span>
-            <span style={{ fontWeight: '300', fontSize: '20px' }}>STATION</span>
-          </div>
-          <div style={{ display: 'flex', gap: '20px', fontSize: '12px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            <Link href="/" style={{ color: '#ffa500', textDecoration: 'none' }}>Home</Link>
-            <Link href="/tournaments" style={{ color: '#666', textDecoration: 'none' }}>Tournaments</Link>
-            <Link href="/leaderboards" style={{ color: '#666', textDecoration: 'none' }}>Leaderboards</Link>
-            <Link href="/staff" style={{ color: '#666', textDecoration: 'none' }}>Staff Panel</Link>
-          </div>
-        </div>
-        <div>
-          {!session ? (
-            <button onClick={() => signIn("discord")} style={{ backgroundColor: '#5865F2', color: 'white', padding: '10px 20px', borderRadius: '50px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Login with Discord</button>
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src={session.user?.image} style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1px solid #ffa500' }} />
-              <button onClick={() => signOut()} style={{ background: 'none', border: 'none', color: '#555', fontSize: '10px', cursor: 'pointer' }}>LOGOUT</button>
+      {/* Achtergrond Gloed Effect */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-siege-accent/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
+
+      {/* Navigatiebalk */}
+      <nav className="border-b border-white/5 bg-[#0a0a0a]/50 backdrop-blur-md sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-10">
+          <div className="flex items-center gap-10">
+            {/* Je Eigen Logo */}
+            <div className="flex items-center gap-2">
+              <span className="text-siege-accent font-black text-xl uppercase tracking-tighter">SIEGE</span>
+              <span className="font-light text-xl uppercase tracking-tighter text-white">STATION</span>
             </div>
-          )}
+            
+            {/* Dynamische Tab Navigatie */}
+            <div className="hidden md:flex items-center gap-2 p-1 bg-black/40 rounded-full border border-white/5">
+              {navItems.map(item => (
+                <Link key={item} href={`/${item.toLowerCase()}`} onClick={() => setActiveTab(item)}
+                  className={`px-5 py-2 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 ${activeTab === item ? 'bg-white text-black shadow-lg' : 'text-gray-400 hover:text-white'}`}>
+                  {item}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            {!session ? (
+              <button onClick={() => signIn("discord")} className="bg-[#5865F2] hover:bg-[#4752c4] px-7 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-200 transform hover:scale-105 shadow-xl shadow-blue-500/10">
+                Sign in with Discord
+              </button>
+            ) : (
+              <div className="flex items-center gap-4 bg-[#121212] p-1.5 pr-5 rounded-full border border-white/5 shadow-inner">
+                <img src={session.user?.image} className="w-8 h-8 rounded-full border border-siege-accent" alt="Avatar" />
+                <span className="text-sm font-bold">{session.user?.name}</span>
+                <button onClick={() => signOut()} className="text-[10px] uppercase text-gray-500 hover:text-white ml-2">Log out</button>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
 
-      <main style={{ textAlign: 'center', padding: '100px 20px' }}>
-        <h1 style={{ fontSize: '72px', fontWeight: '900', margin: 0, tracking: '-3px' }}>THE ULTIMATE</h1>
-        <h1 style={{ fontSize: '72px', fontWeight: '900', margin: 0, color: '#ffa500' }}>COMPETITION HUB</h1>
-        <p style={{ color: '#666', fontSize: '18px', margin: '30px 0' }}>Join high-stakes tournaments and climb the global leaderboards.</p>
-        <Link href="/tournaments" style={{ backgroundColor: 'white', color: 'black', padding: '15px 40px', borderRadius: '15px', textDecoration: 'none', fontWeight: '900', display: 'inline-block' }}>VIEW TOURNAMENTS</Link>
+      {/* Hoofdsectie */}
+      <main className="relative z-10 max-w-7xl mx-auto w-full px-6 py-24 text-center">
+        {/* Titel Sectie met effecten */}
+        <div className="mb-12 relative inline-block">
+          <div className="inline-block px-5 py-2 rounded-full border border-siege-accent/10 bg-siege-accent/5 text-siege-accent text-[11px] font-black uppercase tracking-[0.2em] mb-10 shadow-inner">
+            Professional Security Verified
+          </div>
+          <h1 className="text-6xl md:text-8xl font-black mb-1 tracking-tighter uppercase leading-none text-white scale-in">SIEGE</h1>
+          <h1 className="text-5xl md:text-7xl font-black mb-8 text-siege-accent uppercase leading-none tracking-tight fade-in-up">Tournament Hub</h1>
+          <p className="text-gray-400 max-w-lg mx-auto mb-16 text-lg font-medium fade-in">The official competition platform for the Siege Station community.</p>
+        </div>
+
+        {/* Dynamische Knoppen */}
+        <div className="flex flex-col sm:flex-row gap-5 justify-center items-center mb-24">
+          <Link href="/tournaments" className="px-10 py-5 bg-white text-black rounded-3xl font-black uppercase tracking-tighter text-lg hover:bg-siege-accent transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl">
+            View Tournaments
+          </Link>
+          <button onClick={() => signIn("discord")} className="px-10 py-5 bg-siege-card border border-white/5 rounded-3xl font-black uppercase tracking-tighter text-lg text-white hover:bg-white/5 transition-colors backdrop-blur-sm shadow-xl">
+            Register as Player
+          </button>
+        </div>
+
+        {/* Sectie: Actieve Toernooien (Laden uit DB) */}
+        <section>
+          <div className="flex items-center justify-between mb-10 border-b border-white/5 pb-6">
+            <h2 className="text-3xl font-black tracking-tight flex items-center gap-3">
+              <span className="text-siege-accent">🏆</span> Featured Tournaments
+            </h2>
+            <Link href="/staff" className="text-gray-600 hover:text-siege-accent text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center gap-1.5 p-2 px-4 rounded-full border border-white/5 hover:border-siege-accent/20 bg-black/40">
+              New Tournament (Staff) →
+            </Link>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {tournaments.map((t) => (
+              <div key={t.id} className="bg-siege-card border border-white/5 rounded-[2.5rem] overflow-hidden group hover:border-siege-accent/40 transition-all duration-300 cursor-pointer shadow-2xl hover:shadow-siege-accent/5 scale-up">
+                <div className="h-40 bg-gradient-to-br from-siege-accent/10 to-black flex items-center justify-center border-b border-white/5 relative">
+                  <span className="text-siege-accent/15 font-black text-5xl uppercase tracking-widest">{t.category}</span>
+                  <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-siege-accent/10 border border-siege-accent/20 text-siege-accent text-[9px] font-black uppercase tracking-widest shadow-inner">LIVE</div>
+                </div>
+                <div className="p-8 pb-10">
+                  <h3 className="text-2xl font-bold leading-tight mb-8">Siege Station <br/> Open Cup #{t.id}</h3>
+                  <div className="grid grid-cols-2 gap-4 mb-8">
+                    <div className="bg-black p-4 rounded-xl border border-white/10 shadow-inner">
+                      <p className="text-[10px] text-gray-500 uppercase font-bold mb-1">Prize Pool</p>
+                      <p className="text-lg font-black">{t.prize}</p>
+                    </div>
+                    <div className="bg-black p-4 rounded-xl border border-white/10 shadow-inner">
+                      <p className="text-[10px] text-gray-500 uppercase font-bold mb-1">Date</p>
+                      <p className="text-lg font-black text-siege-accent">{t.date}</p>
+                    </div>
+                  </div>
+                  <button className="w-full bg-white text-black font-black py-4 rounded-2xl hover:bg-siege-accent transition-all duration-200 uppercase tracking-tighter">Deelnemen</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </div>
   );

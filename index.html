@@ -10,193 +10,107 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-
-        header {
-            background-color: #333;
-            padding: 10px 20px;
-        }
-
-        nav ul {
-            list-style: none;
+            background-color: #0d1117;
+            color: #c9d1d9;
             display: flex;
-            justify-content: space-around;
-            padding: 0;
-            margin: 0;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        nav ul li a {
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 18px;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #00ffcc;
-        }
-
-        .hero {
+        .container {
             text-align: center;
-            padding: 50px 20px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        .hero h1 {
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
             font-size: 3rem;
             font-weight: bold;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+            color: #f0f6fc;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin: 20px 0;
+        h2 {
+            font-size: 1.5rem;
+            color: #58a6ff;
         }
 
         button {
-            background-color: #00ffcc;
-            color: #1a1a1a;
+            background-color: #238636;
+            color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding: 15px 30px;
             font-size: 1rem;
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
+            margin: 10px;
         }
 
         button:hover {
-            background-color: #00e6b8;
+            background-color: #2ea043;
             transform: scale(1.05);
         }
 
-        .categories {
-            display: flex;
-            justify-content: space-around;
-            padding: 20px;
+        .hidden {
+            display: none;
         }
 
-        .category {
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            width: 30%;
+        .nav-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #161b22;
+            color: #58a6ff;
+            border: 1px solid #30363d;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        .category h3 {
-            text-align: center;
-            text-shadow: 0 0 5px #00ffcc;
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #333;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
+        .nav-button:hover {
+            background-color: #21262d;
         }
     </style>
 </head>
 <body>
-    <header>
+    <div class="container">
+        <img src="logo.png" alt="Siege Tourneys Logo" class="logo">
+        <h1>Siege Tourneys</h1>
+        <h2>The ultimate R6 tournament platform</h2>
+        <button id="login-discord">Login with Discord</button>
+    </div>
+
+    <button class="nav-button" id="nav-toggle">Menu</button>
+
+    <div id="nav-menu" class="hidden">
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
                 <li><a href="#tourneys">Tourneys</a></li>
                 <li><a href="#leaderboard">Leaderboard</a></li>
                 <li><a href="#staff">Staff</a></li>
             </ul>
         </nav>
-    </header>
-
-    <main id="home">
-        <div class="hero">
-            <h1>Siege Tourneys</h1>
-            <p>Welcome to the ultimate R6 tournament platform!</p>
-            <button id="login-discord">Login with Discord</button>
-        </div>
-    </main>
-
-    <section id="tourneys">
-        <h2>Tourneys</h2>
-        <div class="categories">
-            <div class="category">
-                <h3>Active Tourneys</h3>
-                <ul id="active-tourneys">
-                    <!-- Active tournaments will be dynamically loaded here -->
-                </ul>
-            </div>
-            <div class="category">
-                <h3>Coming Tourneys</h3>
-                <ul id="coming-tourneys">
-                    <!-- Coming tournaments will be dynamically loaded here -->
-                </ul>
-            </div>
-            <div class="category">
-                <h3>Last Tourneys</h3>
-                <ul id="last-tourneys">
-                    <!-- Last tournaments will be dynamically loaded here -->
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="leaderboard">
-        <h2>Leaderboard</h2>
-        <input type="text" placeholder="Search players...">
-        <ul id="leaderboard-list">
-            <!-- Leaderboard data will be dynamically loaded here -->
-        </ul>
-    </section>
-
-    <section id="staff">
-        <h2>Staff</h2>
-        <ul id="staff-list">
-            <!-- Staff members will be dynamically loaded here -->
-        </ul>
-        <button id="staff-login">Staff Login</button>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Siege Tourneys. All rights reserved.</p>
-    </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loginButton = document.getElementById('login-discord');
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
 
             loginButton.addEventListener('click', () => {
-                // Simulate Discord login
                 alert('Redirecting to Discord login...');
-                // Here you would redirect to the Discord OAuth2 URL
             });
 
-            const staffLoginButton = document.getElementById('staff-login');
-
-            staffLoginButton.addEventListener('click', () => {
-                // Simulate Staff login
-                alert('Redirecting to Staff login...');
-                // Here you would redirect to the Staff login page
-            });
-
-            // Example of dynamically loading tournaments
-            const activeTourneys = [
-                'Tournament 1',
-                'Tournament 2',
-                'Tournament 3'
-            ];
-
-            const activeTourneysList = document.getElementById('active-tourneys');
-            activeTourneys.forEach(tourney => {
-                const li = document.createElement('li');
-                li.textContent = tourney;
-                activeTourneysList.appendChild(li);
+            navToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('hidden');
             });
         });
     </script>

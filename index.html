@@ -7,190 +7,37 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{
-  background:#07070d;
-  color:#fff;
-}
-
-/* NAVBAR */
-nav{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:#0b0b12;
-  position:sticky;
-  top:0;
-}
-nav ul{
-  display:flex;
-  gap:50px;
-  list-style:none;
-}
-nav ul li{
-  cursor:pointer;
-  font-weight:600;
-  position:relative;
-}
-nav ul li::after{
-  content:'';
-  position:absolute;
-  bottom:-6px;
-  left:0;
-  width:0%;
-  height:2px;
-  background:#a78bfa;
-  transition:0.3s;
-}
-nav ul li:hover::after{
-  width:100%;
-}
-
-/* HERO (RESTORED + IMPROVED) */
-.hero{
-  height:90vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-
-.logo{
-  font-size:80px;
-  font-weight:800;
-  background:linear-gradient(135deg,#6ee7ff,#a78bfa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 40px rgba(120,200,255,0.4);
-}
-
-.hero h1{
-  font-size:60px;
-  font-weight:800;
-  margin-top:10px;
-}
-
-.hero p{
-  opacity:.7;
-  margin-top:10px;
-}
-
-.button-group{
-  display:flex;
-  gap:15px;
-  margin-top:25px;
-}
-
-.btn{
-  padding:14px 30px;
-  border:none;
-  border-radius:12px;
-  font-weight:600;
-  cursor:pointer;
-  background:linear-gradient(135deg,#5865F2,#6ee7ff);
-  color:white;
-  transition:.3s;
-}
-
-.btn.secondary{
-  background:transparent;
-  border:1px solid rgba(255,255,255,0.2);
-}
-
-.btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 25px rgba(120,200,255,0.5);
-}
-
-/* TOURNAMENT PAGE (REBUILT PROPERLY) */
-.section{
-  padding:80px 12%;
-}
-
-.header{
-  margin-bottom:30px;
-}
-
-.header h1{
-  font-size:32px;
-}
-
-.header p{
-  opacity:.6;
-}
-
-.controls{
-  display:flex;
-  gap:15px;
-  margin-top:20px;
-}
-
-.controls input{
-  flex:1;
-}
-
-input, select{
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  background:#0f0f18;
-  color:white;
-}
-
-.tourney-grid{
-  margin-top:30px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:20px;
-}
-
-.card{
-  background:#0f0f18;
-  padding:20px;
-  border-radius:15px;
-  transition:.3s;
-}
-
-.card:hover{
-  transform:translateY(-5px);
-  box-shadow:0 0 20px rgba(120,200,255,0.2);
-}
-
-.badge{
-  display:inline-block;
-  padding:5px 10px;
-  border-radius:8px;
-  font-size:12px;
-  margin-bottom:10px;
-}
-
+body{background:#07070d;color:#fff}
+nav{display:flex;justify-content:center;align-items:center;padding:20px;background:#0b0b12;position:sticky;top:0}
+nav ul{display:flex;gap:50px;list-style:none}
+nav ul li{cursor:pointer;font-weight:600;position:relative}
+nav ul li::after{content:'';position:absolute;bottom:-6px;left:0;width:0%;height:2px;background:#a78bfa;transition:.3s}
+nav ul li:hover::after{width:100%}
+.hero{height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.logo{font-size:80px;font-weight:800;background:linear-gradient(135deg,#6ee7ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1{font-size:60px;margin-top:10px}
+.hero p{opacity:.7;margin-top:10px}
+.button-group{display:flex;gap:15px;margin-top:25px}
+.btn{padding:14px 30px;border:none;border-radius:12px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#5865F2,#6ee7ff);color:white;transition:.3s}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.2)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 25px rgba(120,200,255,0.5)}
+.section{padding:80px 12%}
+.header{margin-bottom:30px}
+.controls{display:flex;gap:15px;margin-top:20px}
+.controls input{flex:1}
+input,select,textarea{padding:12px;border-radius:10px;border:none;background:#0f0f18;color:white}
+.tourney-grid{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:#0f0f18;padding:20px;border-radius:15px;transition:.3s;position:relative}
+.card:hover{transform:translateY(-5px);box-shadow:0 0 20px rgba(120,200,255,0.2)}
+.badge{display:inline-block;padding:5px 10px;border-radius:8px;font-size:12px;margin-bottom:10px}
 .active{background:#22c55e33;color:#22c55e}
 .coming{background:#facc1533;color:#facc15}
 .past{background:#ef444433;color:#ef4444}
-
 .hidden{display:none}
-
-/* STAFF */
-.dashboard{
-  margin-top:30px;
-}
-
-.form{
-  margin-top:20px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-textarea{
-  padding:10px;
-  border-radius:10px;
-  background:#0f0f18;
-  border:none;
-  color:white;
-}
-
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center}
+.modal-box{background:#111;padding:30px;border-radius:15px;width:300px}
+.dashboard{margin-top:30px}
+.actions{margin-top:10px;display:flex;gap:10px}
 </style>
 </head>
 <body>
@@ -204,27 +51,22 @@ textarea{
 </ul>
 </nav>
 
-<!-- HOME -->
 <div id="home" class="page">
 <div class="hero">
 <div class="logo">R6</div>
 <h1>Siege Tourneys</h1>
 <p>The official tournament platform</p>
-
 <div class="button-group">
 <button class="btn" onclick="loginDiscord()">Login with Discord</button>
 <button class="btn secondary" onclick="showPage('tourneys')">View Tournaments</button>
 </div>
-
 </div>
 </div>
 
-<!-- TOURNAMENTS -->
 <div id="tourneys" class="page hidden section">
 <div class="header">
 <h1>🏆 Tournaments</h1>
 <p>Browse and sign up for tournaments</p>
-
 <div class="controls">
 <input placeholder="Search tournaments...">
 <select>
@@ -235,70 +77,87 @@ textarea{
 </select>
 </div>
 </div>
-
 <div class="tourney-grid" id="tourneyGrid"></div>
 <p id="empty">No tournaments found</p>
 </div>
 
-<!-- STAFF -->
 <div id="staff" class="page hidden section">
 <h1>Staff Panel</h1>
-<button class="btn" onclick="staffLogin()">Staff Login</button>
+<button class="btn" onclick="openLogin()">Staff Login</button>
+
+<div id="loginModal" class="modal hidden">
+<div class="modal-box">
+<h3>Staff Login</h3>
+<input id="user" placeholder="Username">
+<input id="pass" placeholder="Password" type="password">
+<button class="btn" onclick="staffLogin()">Login</button>
+</div>
+</div>
 
 <div id="dashboard" class="dashboard hidden">
 <h2>Dashboard</h2>
-
-<div class="form">
+<button class="btn" onclick="toggleCreate()">Create Tournament</button>
+<div id="create" class="hidden">
 <input id="name" placeholder="Tournament Name">
 <select id="category">
 <option value="active">Active</option>
 <option value="coming">Coming</option>
 <option value="past">Past</option>
 </select>
-<input id="date" type="date">
+<input id="date" type="datetime-local">
 <textarea id="info" placeholder="Tournament Info"></textarea>
 <button class="btn" onclick="createTournament()">Publish</button>
 </div>
+
+<h3 style="margin-top:30px">Manage Tournaments</h3>
+<div id="manageList"></div>
 </div>
 </div>
 
 <script>
 let tournaments=[];
+let logged=false;
 
 function showPage(p){
 document.querySelectorAll('.page').forEach(el=>el.classList.add('hidden'));
 document.getElementById(p).classList.remove('hidden');
 }
 
-function loginDiscord(){alert('Discord OAuth later')}
+function loginDiscord(){logged=true;alert('Logged in (mock)')}
+
+function openLogin(){document.getElementById('loginModal').classList.remove('hidden')}
 
 function staffLogin(){
-let pass=prompt('Enter staff password');
-if(pass==='admin'){
+if(user.value==='admin' && pass.value==='admin'){
+document.getElementById('loginModal').classList.add('hidden');
 document.getElementById('dashboard').classList.remove('hidden');
+}else{alert('Wrong login')}
 }
-}
+
+function toggleCreate(){document.getElementById('create').classList.toggle('hidden')}
 
 function createTournament(){
 let t={
+id:Date.now(),
 name:name.value,
 cat:category.value,
-info:info.value
+info:info.value,
+date:date.value
 };
 
 tournaments.push(t);
+alert('Tournament created!');
 render();
 }
 
 function render(){
 let grid=document.getElementById('tourneyGrid');
+let manage=document.getElementById('manageList');
+
 grid.innerHTML='';
+manage.innerHTML='';
 
-if(tournaments.length===0){
-empty.style.display='block';
-return;
-}
-
+if(tournaments.length===0){empty.style.display='block';return}
 empty.style.display='none';
 
 tournaments.forEach(t=>{
@@ -308,10 +167,30 @@ div.innerHTML=`
 <span class="badge ${t.cat}">${t.cat}</span>
 <h3>${t.name}</h3>
 <p>${t.info}</p>
+<p>${t.date}</p>
+<button class="btn" onclick="join(${t.id})">Join</button>
 `;
-
 grid.appendChild(div);
+
+let m=document.createElement('div');
+m.className='card';
+m.innerHTML=`
+${t.name}
+<div class='actions'>
+<button onclick="deleteT(${t.id})">Delete</button>
+</div>`;
+manage.appendChild(m);
 });
+}
+
+function deleteT(id){
+tournaments=tournaments.filter(t=>t.id!==id);
+render();
+}
+
+function join(id){
+if(!logged){alert('Login with Discord first');return}
+alert('Joined tournament!')
 }
 </script>
 

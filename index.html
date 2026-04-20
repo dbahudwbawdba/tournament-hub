@@ -1,97 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siege Tourneys</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a;
+            color: #ffffff;
+        }
 
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1a1a1a;
-    color: #ffffff;
-}
+        header {
+            background-color: #333;
+            padding: 10px 20px;
+        }
 
-header {
-    background-color: #333;
-    padding: 10px 20px;
-}
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            padding: 0;
+            margin: 0;
+        }
 
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
-    margin: 0;
-}
+        nav ul li a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
 
-nav ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    transition: color 0.3s;
-}
+        nav ul li a:hover {
+            color: #00ffcc;
+        }
 
-nav ul li a:hover {
-    color: #00ffcc;
-}
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
 
-.hero {
-    text-align: center;
-    padding: 50px 20px;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+        }
 
-.hero h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-}
+        .hero p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
 
-.hero p {
-    font-size: 1.2rem;
-    margin: 20px 0;
-}
+        button {
+            background-color: #00ffcc;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
 
-button {
-    background-color: #00ffcc;
-    color: #1a1a1a;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-}
+        button:hover {
+            background-color: #00e6b8;
+            transform: scale(1.05);
+        }
 
-button:hover {
-    background-color: #00e6b8;
-    transform: scale(1.05);
-}
+        .categories {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
 
-.categories {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-}
+        .category {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            width: 30%;
+        }
 
-.category {
-    background-color: #2a2a2a;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    width: 30%;
-}
+        .category h3 {
+            text-align: center;
+            text-shadow: 0 0 5px #00ffcc;
+        }
 
-.category h3 {
-    text-align: center;
-    text-shadow: 0 0 5px #00ffcc;
-}
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tourneys">Tourneys</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+                <li><a href="#staff">Staff</a></li>
+            </ul>
+        </nav>
+    </header>
 
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
+    <main id="home">
+        <div class="hero">
+            <h1>Siege Tourneys</h1>
+            <p>Welcome to the ultimate R6 tournament platform!</p>
+            <button id="login-discord">Login with Discord</button>
+        </div>
+    </main>
+
+    <section id="tourneys">
+        <h2>Tourneys</h2>
+        <div class="categories">
+            <div class="category">
+                <h3>Active Tourneys</h3>
+                <ul id="active-tourneys">
+                    <!-- Active tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Coming Tourneys</h3>
+                <ul id="coming-tourneys">
+                    <!-- Coming tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Last Tourneys</h3>
+                <ul id="last-tourneys">
+                    <!-- Last tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="leaderboard">
+        <h2>Leaderboard</h2>
+        <input type="text" placeholder="Search players...">
+        <ul id="leaderboard-list">
+            <!-- Leaderboard data will be dynamically loaded here -->
+        </ul>
+    </section>
+
+    <section id="staff">
+        <h2>Staff</h2>
+        <ul id="staff-list">
+            <!-- Staff members will be dynamically loaded here -->
+        </ul>
+        <button id="staff-login">Staff Login</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Siege Tourneys. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginButton = document.getElementById('login-discord');
+
+            loginButton.addEventListener('click', () => {
+                // Simulate Discord login
+                alert('Redirecting to Discord login...');
+                // Here you would redirect to the Discord OAuth2 URL
+            });
+
+            const staffLoginButton = document.getElementById('staff-login');
+
+            staffLoginButton.addEventListener('click', () => {
+                // Simulate Staff login
+                alert('Redirecting to Staff login...');
+                // Here you would redirect to the Staff login page
+            });
+
+            // Example of dynamically loading tournaments
+            const activeTourneys = [
+                'Tournament 1',
+                'Tournament 2',
+                'Tournament 3'
+            ];
+
+            const activeTourneysList = document.getElementById('active-tourneys');
+            activeTourneys.forEach(tourney => {
+                const li = document.createElement('li');
+                li.textContent = tourney;
+                activeTourneysList.appendChild(li);
+            });
+        });
+    </script>
+</body>
+</html>

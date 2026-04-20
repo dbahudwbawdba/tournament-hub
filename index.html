@@ -1,118 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siege Tourneys</title>
-    <style>
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .container {
-            text-align: center;
-        }
-
-        .logo {
-            width: 100px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #f0f6fc;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            color: #58a6ff;
-        }
-
-        button {
-            background-color: #238636;
-            color: #ffffff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            margin: 10px;
-        }
-
-        button:hover {
-            background-color: #2ea043;
-            transform: scale(1.05);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .nav-button {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #161b22;
-            color: #58a6ff;
-            border: 1px solid #30363d;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .nav-button:hover {
-            background-color: #21262d;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Siege Tourneys</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+body{background:#0a0a0f;color:#fff}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 50px;background:#0d0d14;position:sticky;top:0}
+nav h1{font-weight:800;color:#ffa500}
+nav ul{display:flex;gap:25px;list-style:none}
+nav ul li{cursor:pointer;transition:.3s}
+nav ul li:hover{color:#ffa500}
+.hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:80vh;text-align:center}
+.hero h2{font-size:60px;font-weight:800;color:#ffa500;text-shadow:0 0 20px #ffa500}
+.hero p{margin-top:10px;font-size:20px;opacity:.8}
+.btn{margin-top:20px;padding:12px 25px;border:none;border-radius:10px;background:#5865F2;color:#fff;font-weight:600;cursor:pointer;transition:.3s}
+.btn:hover{box-shadow:0 0 15px #5865F2}
+.section{padding:60px 50px}
+.card{background:#11111a;padding:20px;border-radius:15px;margin:10px 0;transition:.3s}
+.card:hover{transform:scale(1.02);box-shadow:0 0 20px #ffa50033}
+.hidden{display:none}
+input,textarea{width:100%;padding:10px;margin:10px 0;border-radius:8px;border:none}
+.footer{padding:20px;text-align:center;opacity:.6}
+</style>
 </head>
 <body>
-    <div class="container">
-        <img src="logo.png" alt="Siege Tourneys Logo" class="logo">
-        <h1>Siege Tourneys</h1>
-        <h2>The ultimate R6 tournament platform</h2>
-        <button id="login-discord">Login with Discord</button>
-    </div>
 
-    <button class="nav-button" id="nav-toggle">Menu</button>
+<nav>
+<h1>Siege Tourneys</h1>
+<ul>
+<li onclick="showPage('home')">Home</li>
+<li onclick="showPage('tourneys')">Tourneys</li>
+<li onclick="showPage('leaderboard')">Leaderboard</li>
+<li onclick="showPage('staff')">Staff</li>
+</ul>
+</nav>
 
-    <div id="nav-menu" class="hidden">
-        <nav>
-            <ul>
-                <li><a href="#tourneys">Tourneys</a></li>
-                <li><a href="#leaderboard">Leaderboard</a></li>
-                <li><a href="#staff">Staff</a></li>
-            </ul>
-        </nav>
-    </div>
+<div id="home" class="page">
+<div class="hero">
+<h2>Siege Tourneys</h2>
+<p>The ultimate R6 competitive hub</p>
+<button class="btn" onclick="loginDiscord()">Login with Discord</button>
+</div>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginButton = document.getElementById('login-discord');
-            const navToggle = document.getElementById('nav-toggle');
-            const navMenu = document.getElementById('nav-menu');
+<div id="tourneys" class="page hidden section">
+<h2>Active Tourneys</h2>
+<div id="active"></div>
+<h2>Coming Tourneys</h2>
+<div id="coming"></div>
+<h2>Last Tourneys</h2>
+<div id="past"></div>
+</div>
 
-            loginButton.addEventListener('click', () => {
-                alert('Redirecting to Discord login...');
-            });
+<div id="leaderboard" class="page hidden section">
+<h2>Leaderboard</h2>
+<input type="text" placeholder="Search player..." onkeyup="searchLeaderboard(this.value)">
+<div id="leaderboardList"></div>
+</div>
 
-            navToggle.addEventListener('click', () => {
-                navMenu.classList.toggle('hidden');
-            });
-        });
-    </script>
+<div id="staff" class="page hidden section">
+<h2>Staff Team</h2>
+<div class="card">Admin - DiscordUser#0001</div>
+<button class="btn" onclick="staffLogin()">Staff Login</button>
+<div id="dashboard" class="hidden">
+<h2>Staff Dashboard</h2>
+<button class="btn" onclick="showCreate()">Create Tournament</button>
+<div id="createForm" class="hidden">
+<input id="name" placeholder="Tournament Name">
+<select id="category">
+<option>Active</option>
+<option>Coming</option>
+<option>Past</option>
+</select>
+<input id="date" type="date">
+<textarea id="info" placeholder="Info"></textarea>
+<button class="btn" onclick="publishTournament()">Publish</button>
+</div>
+</div>
+</div>
+
+<div class="footer">© 2026 Siege Tourneys</div>
+
+<script>
+let loggedIn=false;
+let staff=false;
+let leaderboard=[{name:'Player1',points:100},{name:'Player2',points:80}];
+
+function showPage(page){
+document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+document.getElementById(page).classList.remove('hidden');
+}
+
+function loginDiscord(){
+alert('Discord OAuth would happen here');
+loggedIn=true;
+}
+
+function staffLogin(){
+let pass=prompt('Enter staff password');
+if(pass==='admin'){
+staff=true;
+document.getElementById('dashboard').classList.remove('hidden');
+}
+}
+
+function showCreate(){
+document.getElementById('createForm').classList.toggle('hidden');
+}
+
+function publishTournament(){
+let name=document.getElementById('name').value;
+let cat=document.getElementById('category').value;
+let info=document.getElementById('info').value;
+let card=document.createElement('div');
+card.className='card';
+card.innerHTML=`<h3>${name}</h3><p>${info}</p>`;
+
+if(cat==='Active') document.getElementById('active').appendChild(card);
+if(cat==='Coming') document.getElementById('coming').appendChild(card);
+if(cat==='Past') document.getElementById('past').appendChild(card);
+}
+
+function loadLeaderboard(){
+let list=document.getElementById('leaderboardList');
+list.innerHTML='';
+leaderboard.forEach(p=>{
+let div=document.createElement('div');
+div.className='card';
+div.innerText=`${p.name} - ${p.points} pts`;
+list.appendChild(div);
+});
+}
+
+function searchLeaderboard(val){
+let filtered=leaderboard.filter(p=>p.name.toLowerCase().includes(val.toLowerCase()));
+let list=document.getElementById('leaderboardList');
+list.innerHTML='';
+filtered.forEach(p=>{
+let div=document.createElement('div');
+div.className='card';
+div.innerText=`${p.name} - ${p.points} pts`;
+list.appendChild(div);
+});
+}
+
+loadLeaderboard();
+</script>
+
 </body>
 </html>

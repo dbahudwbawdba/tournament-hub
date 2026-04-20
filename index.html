@@ -1,351 +1,75 @@
+
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R6 Tourney Hub</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background-color: #050505;
-      color: #f8fafc;
-      background-image:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 22%),
-        radial-gradient(circle at top right, rgba(168, 85, 247, 0.14), transparent 18%),
-        radial-gradient(circle at bottom, rgba(255, 255, 255, 0.04), transparent 20%),
-        radial-gradient(circle at center, #11111a 0%, #050505 100%);
-    }
-
-    .glass {
-      background: rgba(15, 23, 42, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.24);
-    }
-
-    .nav-link {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      color: rgba(226, 232, 240, 0.75);
-      transition: color .2s ease;
-    }
-
-    .nav-link.active,
-    .nav-link:hover {
-      color: #fff;
-    }
-
-    .hero-title {
-      font-size: clamp(3.5rem, 7vw, 6rem);
-      line-height: 0.92;
-      letter-spacing: -0.06em;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1.75rem, 3.7vw, 2.5rem);
-      line-height: 1.1;
-      max-width: 34rem;
-    }
-
-    .stat-pill {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-      padding: 0.95rem 1rem;
-      border-radius: 1.5rem;
-      font-size: 0.82rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .small-label {
-      text-transform: uppercase;
-      letter-spacing: 0.26em;
-      font-size: 0.72rem;
-      color: #94a3b8;
-    }
-
-    .card-small {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 1.75rem;
-      padding: 1.35rem;
-    }
-
-    .button-primary {
-      background: #5865f2;
-      color: white;
-    }
-
-    .button-primary:hover {
-      background: #4752c4;
-    }
-
-    .button-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      color: #e2e8f0;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .button-secondary:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .tab-panel {
-      display: none;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: opacity .35s ease, transform .35s ease;
-    }
-
-    .tab-panel.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 900px) {
-      .hero-title {
-        font-size: 3rem;
-      }
-      .hero-subtitle {
-        font-size: 1.6rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siege Tourneys</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
-<body class="flex min-h-screen flex-col">
-  <header class="border-b border-white/10 bg-[#07070b]/95 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4">
-      <div class="flex items-center gap-4">
-        <div class="flex h-12 w-12 items-center justify-center rounded-3xl bg-gradient-to-br from-blue-500 to-purple-600 shadow-[0_18px_50px_rgba(59,130,246,0.25)]">
-          <span class="font-black text-[10px] uppercase tracking-[0.4em] text-white">R6</span>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#tourneys">Tourneys</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+                <li><a href="#staff">Staff</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="home">
+        <div class="hero">
+            <h1>Siege Tourneys</h1>
+            <p>Welcome to the ultimate R6 tournament platform!</p>
+            <button id="login-discord">Login with Discord</button>
         </div>
-        <div class="flex flex-col leading-none">
-          <span class="text-sm font-black uppercase tracking-[0.24em] text-white">R6 Tourney</span>
-          <span class="text-xs uppercase tracking-[0.35em] text-slate-400">Hub</span>
+    </main>
+
+    <section id="tourneys">
+        <h2>Tourneys</h2>
+        <div class="categories">
+            <div class="category">
+                <h3>Active Tourneys</h3>
+                <ul id="active-tourneys">
+                    <!-- Active tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Coming Tourneys</h3>
+                <ul id="coming-tourneys">
+                    <!-- Coming tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Last Tourneys</h3>
+                <ul id="last-tourneys">
+                    <!-- Last tournaments will be dynamically loaded here -->
+                </ul>
+            </div>
         </div>
-      </div>
-
-      <div class="hidden md:flex items-center gap-10">
-        <button class="nav-link active" data-tab="dashboard">Dashboard</button>
-        <button class="nav-link" data-tab="tournaments">Tournaments</button>
-      </div>
-
-      <button onclick="login()" class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] button-primary shadow-lg shadow-[#5865f2]/30 transition">
-        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037 19.736 19.736 0 0 0-4.885 1.515.069.069 0 0 0-.032.027C.533 9.048-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.23 10.23 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.196.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-        </svg>
-        Sign in with Discord
-      </button>
-    </div>
-  </header>
-
-  <main class="mx-auto flex w-full max-w-[1400px] flex-1 flex-col gap-10 px-6 py-10">
-    <section id="dashboard" class="tab-panel active">
-      <div class="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-        <div class="glass rounded-[2rem] p-10">
-          <div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-            <div class="max-w-2xl">
-              <span class="small-label inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2">Live community tournaments</span>
-              <h1 class="hero-title font-black mt-8">Siege Station Hub</h1>
-              <p class="hero-subtitle mt-6 text-slate-300">
-                De officiële Rainbow Six community hub waar je eenvoudig kunt inschrijven, teams beheren en staff-only toernooien creëren.
-              </p>
-
-              <div class="mt-10 flex flex-wrap gap-4">
-                <button onclick="switchTab('tournaments')" class="button-primary rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em]">
-                  View Tournaments
-                </button>
-                <button onclick="login()" class="button-secondary rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em]">
-                  Login with Discord
-                </button>
-              </div>
-            </div>
-
-            <div class="grid gap-5 sm:grid-cols-2">
-              <div class="card-small">
-                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Next event</p>
-                <p class="mt-3 text-xl font-semibold text-white">NA 2v2 Qualifier</p>
-                <p class="mt-2 text-sm text-slate-400">20 april 2026</p>
-              </div>
-              <div class="card-small">
-                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Open slots</p>
-                <p class="mt-3 text-xl font-semibold text-white">8 / 16 teams</p>
-                <p class="mt-2 text-sm text-slate-400">2v2 format</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="space-y-8">
-          <div class="glass rounded-[2rem] p-8">
-            <div class="flex items-center justify-between gap-4">
-              <div>
-                <p class="text-sm uppercase tracking-[0.28em] text-slate-400">Dashboard overview</p>
-                <h2 class="mt-3 text-2xl font-black text-white">Community stats</h2>
-              </div>
-              <span class="stat-pill">Live / updated</span>
-            </div>
-
-            <div class="mt-8 grid gap-4 sm:grid-cols-3">
-              <div class="stat-pill flex-col items-start gap-2">
-                <span class="text-xs uppercase tracking-[0.28em]">Registrations</span>
-                <strong class="text-xl">124</strong>
-              </div>
-              <div class="stat-pill flex-col items-start gap-2">
-                <span class="text-xs uppercase tracking-[0.28em]">Active teams</span>
-                <strong class="text-xl">42</strong>
-              </div>
-              <div class="stat-pill flex-col items-start gap-2">
-                <span class="text-xs uppercase tracking-[0.28em]">Open events</span>
-                <strong class="text-xl">3</strong>
-              </div>
-            </div>
-          </div>
-
-          <div class="glass rounded-[2rem] p-8">
-            <div class="flex items-center justify-between gap-4">
-              <div>
-                <p class="text-sm uppercase tracking-[0.28em] text-slate-400">Top teams</p>
-                <h2 class="mt-3 text-2xl font-black text-white">Recent signups</h2>
-              </div>
-              <span class="stat-pill">Live</span>
-            </div>
-
-            <div class="mt-8 space-y-4">
-              <div class="flex items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-4">
-                <div class="h-12 w-12 rounded-full bg-slate-800"></div>
-                <div>
-                  <p class="font-semibold text-white">Team Spectre</p>
-                  <p class="text-sm text-slate-400">Registered 4 minutes ago</p>
-                </div>
-              </div>
-              <div class="flex items-center gap-4 rounded-3xl border border-white/10 bg-white/5 p-4">
-                <div class="h-12 w-12 rounded-full bg-slate-800"></div>
-                <div>
-                  <p class="font-semibold text-white">Team Phantom</p>
-                  <p class="text-sm text-slate-400">Registered 12 minutes ago</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
     </section>
 
-    <section id="tournaments" class="tab-panel">
-      <div class="glass rounded-[2rem] p-10">
-        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <p class="text-sm uppercase tracking-[0.28em] text-slate-400">Tournaments</p>
-            <h2 class="mt-3 text-3xl font-black text-white">Browse community events</h2>
-          </div>
-          <div class="flex flex-wrap gap-4">
-            <button class="button-secondary rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em]">All statuses</button>
-            <button onclick="login()" class="button-primary rounded-full px-5 py-3 text-sm font-semibold uppercase tracking-[0.14em]">Sign in with Discord</button>
-          </div>
-        </div>
-
-        <div class="mt-8 grid gap-6 lg:grid-cols-[1.4fr_0.6fr]">
-          <input type="search" placeholder="Search tournaments..." class="search-box h-14 rounded-3xl border border-white/10 bg-white/5 px-5 text-sm text-white outline-none placeholder:text-slate-500" />
-          <div class="card-small">
-            <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Filter</p>
-            <div class="mt-5 space-y-3">
-              <button class="button-secondary w-full rounded-3xl px-4 py-3 text-left text-sm font-semibold">Open</button>
-              <button class="button-secondary w-full rounded-3xl px-4 py-3 text-left text-sm font-semibold">Ongoing</button>
-              <button class="button-secondary w-full rounded-3xl px-4 py-3 text-left text-sm font-semibold">Finished</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-8 grid gap-6">
-        <article class="tournament-card glass">
-          <div class="card-top p-8">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">NA 2v2</p>
-                <h3 class="mt-2 text-2xl font-black text-white">Open qualifier</h3>
-              </div>
-              <span class="status-pill">Open</span>
-            </div>
-            <div class="mt-6 grid gap-4 md:grid-cols-3">
-              <span class="text-slate-300">2v2</span>
-              <span class="text-slate-300">8/16 teams</span>
-              <span class="text-slate-300">20-4-2026</span>
-            </div>
-            <p class="mt-4 text-slate-400">Winners role & leaderboard live. Sign in with Discord to register your team.</p>
-          </div>
-          <div class="card-bottom flex flex-wrap items-center justify-between gap-4">
-            <p class="text-sm text-slate-400">Sign in with Discord to register</p>
-            <button onclick="login()" class="button-secondary rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em]">Register</button>
-          </div>
-        </article>
-
-        <article class="tournament-card glass">
-          <div class="card-top p-8">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p class="text-xs uppercase tracking-[0.3em] text-slate-400">EU 3v3</p>
-                <h3 class="mt-2 text-2xl font-black text-white">Ranked cup</h3>
-              </div>
-              <span class="status-pill ongoing">Ongoing</span>
-            </div>
-            <div class="mt-6 grid gap-4 md:grid-cols-3">
-              <span class="text-slate-300">3v3</span>
-              <span class="text-slate-300">14/16 teams</span>
-              <span class="text-slate-300">Live bracket</span>
-            </div>
-            <p class="mt-4 text-slate-400">Live event open now. Login to claim your spot before the bracket locks.</p>
-          </div>
-          <div class="card-bottom flex flex-wrap items-center justify-between gap-4">
-            <p class="text-sm text-slate-400">Discord login required</p>
-            <button onclick="login()" class="button-secondary rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.14em]">Register</button>
-          </div>
-        </article>
-      </div>
+    <section id="leaderboard">
+        <h2>Leaderboard</h2>
+        <input type="text" placeholder="Search players...">
+        <ul id="leaderboard-list">
+            <!-- Leaderboard data will be dynamically loaded here -->
+        </ul>
     </section>
-  </main>
 
-  <footer class="border-t border-white/10 bg-[#07070b]/95 px-6 py-6 text-center text-sm text-slate-500">
-    © 2026 R6 Tourney Hub
-  </footer>
+    <section id="staff">
+        <h2>Staff</h2>
+        <ul id="staff-list">
+            <!-- Staff members will be dynamically loaded here -->
+        </ul>
+        <button id="staff-login">Staff Login</button>
+    </section>
 
-  <script>
-    const tabs = document.querySelectorAll('[data-tab]');
-    const pages = document.querySelectorAll('.tab-panel');
-
-    function switchTab(id) {
-      pages.forEach(page => page.classList.toggle('active', page.id === id));
-      tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.tab === id));
-      window.location.hash = id;
-    }
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
-    });
-
-    function initTab() {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && document.getElementById(hash)) {
-        switchTab(hash);
-      } else {
-        switchTab('dashboard');
-      }
-    }
-
-    function login() {
-      window.location.href = '/auth/discord';
-    }
-
-    initTab();
-  </script>
+    <footer>
+        <p>&copy; 2026 Siege Tourneys. All rights reserved.</p>
+    </footer>
 </body>
 </html>

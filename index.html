@@ -7,153 +7,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{
-  background: radial-gradient(circle at top, #0f0f1a, #05050a);
-  color:#fff;
-  overflow-x:hidden;
-}
+body{background:#05050a;color:#fff}
 
-/* NAVBAR */
-nav{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  background:rgba(10,10,20,0.8);
-  backdrop-filter:blur(10px);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-nav ul{
-  display:flex;
-  gap:40px;
-  list-style:none;
-}
-nav ul li{
-  cursor:pointer;
-  font-weight:600;
-  position:relative;
-  transition:.3s;
-}
-nav ul li::after{
-  content:'';
-  position:absolute;
-  bottom:-5px;
-  left:0;
-  width:0%;
-  height:2px;
-  background:linear-gradient(90deg,#6ee7ff,#a78bfa);
-  transition:.3s;
-}
-nav ul li:hover::after{
-  width:100%;
-}
+nav{display:flex;justify-content:center;align-items:center;padding:20px;background:#0d0d14;position:sticky;top:0;z-index:100}
+nav ul{display:flex;gap:50px;list-style:none}
+nav ul li{cursor:pointer;font-weight:600;transition:.3s}
+nav ul li:hover{color:#a78bfa}
 
-/* HERO */
-.hero{
-  height:90vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+.hero{height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.logo{font-size:70px;font-weight:800;background:linear-gradient(135deg,#6ee7ff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-.logo{
-  font-size:70px;
-  font-weight:800;
-  background:linear-gradient(135deg,#6ee7ff,#a78bfa);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 40px rgba(120,200,255,0.5);
-  animation:glow 3s infinite alternate;
-}
+.btn{margin-top:20px;padding:12px 25px;border:none;border-radius:10px;background:linear-gradient(135deg,#5865F2,#6ee7ff);color:#fff;font-weight:600;cursor:pointer;transition:.3s}
+.btn:hover{transform:scale(1.05);box-shadow:0 0 20px #6ee7ff}
 
-@keyframes glow{
-  from{ text-shadow:0 0 10px #6ee7ff }
-  to{ text-shadow:0 0 40px #a78bfa }
-}
-
-.hero h1{
-  font-size:55px;
-  font-weight:800;
-}
-
-.hero p{
-  opacity:.7;
-  margin-top:10px;
-}
-
-.btn{
-  margin-top:25px;
-  padding:14px 30px;
-  border-radius:12px;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  background:linear-gradient(135deg,#5865F2,#6ee7ff);
-  color:#fff;
-  transition:.3s;
-}
-
-.btn:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(120,200,255,0.6);
-}
-
-/* SECTIONS */
-.section{
-  padding:80px 15%;
-}
-
-.section h2{
-  margin-bottom:20px;
-  font-size:30px;
-}
-
-.card{
-  background:rgba(255,255,255,0.05);
-  padding:20px;
-  border-radius:15px;
-  margin-bottom:15px;
-  transition:.3s;
-  backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,0.1);
-}
-
-.card:hover{
-  transform:translateY(-5px) scale(1.02);
-  box-shadow:0 0 25px rgba(120,200,255,0.2);
-}
-
+.section{padding:60px 10%}
+.card{background:#0f0f1a;padding:20px;border-radius:12px;margin:10px 0;transition:.3s}
+.card:hover{transform:translateY(-5px)}
 .hidden{display:none}
+input,textarea,select{width:100%;padding:10px;margin-top:10px;border-radius:8px;border:none;background:#111;color:#fff}
 
-input, textarea, select{
-  width:100%;
-  padding:12px;
-  margin-top:10px;
-  border-radius:10px;
-  border:none;
-  background:#0f0f1a;
-  color:#fff;
-}
-
-/* FADE ANIMATION */
-.fade-in{
-  animation:fade 0.8s ease forwards;
-}
-
-@keyframes fade{
-  from{opacity:0; transform:translateY(20px)}
-  to{opacity:1; transform:translateY(0)}
-}
-
-.footer{
-  text-align:center;
-  padding:30px;
-  opacity:.5;
-}
+.searchBar{display:flex;gap:10px;margin-bottom:20px}
+.searchBar input{flex:1}
 
 </style>
 </head>
@@ -162,46 +36,54 @@ input, textarea, select{
 <nav>
 <ul>
 <li onclick="showPage('home')">Home</li>
-<li onclick="showPage('tourneys')">Tourneys</li>
+<li onclick="showPage('tourneys')">Tournaments</li>
 <li onclick="showPage('leaderboard')">Leaderboard</li>
 <li onclick="showPage('staff')">Staff</li>
 </ul>
 </nav>
 
 <!-- HOME -->
-<div id="home" class="page fade-in">
+<div id="home" class="page">
 <div class="hero">
 <div class="logo">R6</div>
 <h1>Siege Tourneys</h1>
-<p>Competitive Rainbow Six Siege Tournaments</p>
+<p>Competitive R6 tournaments</p>
 <button class="btn" onclick="loginDiscord()">Login with Discord</button>
+<button class="btn" onclick="showPage('tourneys')">View Tournaments</button>
 </div>
 </div>
 
-<!-- TOURNEYS -->
+<!-- TOURNAMENT PAGE -->
 <div id="tourneys" class="page hidden section">
-<h2>Active Tourneys</h2>
-<div id="active"></div>
+<h1>Tournaments</h1>
+<p>Browse and join tournaments</p>
 
-<h2>Coming Tourneys</h2>
-<div id="coming"></div>
+<div class="searchBar">
+<input placeholder="Search tournaments...">
+<select>
+<option>All Status</option>
+<option>Active</option>
+<option>Coming</option>
+<option>Past</option>
+</select>
+</div>
 
-<h2>Last Tourneys</h2>
-<div id="past"></div>
+<div id="tourneyList"></div>
+
+<p id="empty">No tournaments found</p>
 </div>
 
 <!-- LEADERBOARD -->
 <div id="leaderboard" class="page hidden section">
 <h2>Leaderboard</h2>
-<input placeholder="Search..." onkeyup="searchLeaderboard(this.value)">
+<input placeholder="Search player..." onkeyup="searchLeaderboard(this.value)">
 <div id="leaderboardList"></div>
 </div>
 
 <!-- STAFF -->
 <div id="staff" class="page hidden section">
 <h2>Staff Team</h2>
-<div class="card">Owner - Discord#0001</div>
-<div class="card">Admin - Discord#0002</div>
+<div class="card">Owner - You</div>
 
 <button class="btn" onclick="staffLogin()">Staff Login</button>
 
@@ -210,84 +92,91 @@ input, textarea, select{
 <button class="btn" onclick="toggleCreate()">Create Tournament</button>
 
 <div id="create" class="hidden">
-<input id="tname" placeholder="Name">
-<select id="tcat">
+<input id="name" placeholder="Tournament Name">
+<select id="category">
 <option>Active</option>
 <option>Coming</option>
 <option>Past</option>
 </select>
-<input id="tdate" type="date">
-<textarea id="tinfo" placeholder="Info"></textarea>
-<button class="btn" onclick="createTournament()">Publish</button>
+<input id="date" type="date">
+<textarea id="info" placeholder="Tournament Info"></textarea>
+<button class="btn" onclick="publishTournament()">Publish</button>
 </div>
 </div>
 </div>
-
-<div class="footer">© Siege Tourneys</div>
 
 <script>
-let leaderboard=[
-{name:'ProPlayer',points:200},
-{name:'Champion',points:150}
-];
+let tournaments=[];
+let leaderboard=[{name:'Player1',points:120}];
 
-function showPage(id){
- document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
- let page=document.getElementById(id);
- page.classList.remove('hidden');
- page.classList.add('fade-in');
+function showPage(p){
+document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));
+document.getElementById(p).classList.remove('hidden');
 }
 
-function loginDiscord(){
- alert('Discord login coming soon');
-}
+function loginDiscord(){alert('Discord login later')}
 
 function staffLogin(){
- let pass=prompt('Enter password');
- if(pass==='admin'){
-   document.getElementById('dashboard').classList.remove('hidden');
- }
+let pass=prompt('Password');
+if(pass==='admin'){
+document.getElementById('dashboard').classList.remove('hidden');
+}
 }
 
 function toggleCreate(){
- document.getElementById('create').classList.toggle('hidden');
+document.getElementById('create').classList.toggle('hidden');
 }
 
-function createTournament(){
- let name=document.getElementById('tname').value;
- let cat=document.getElementById('tcat').value;
- let info=document.getElementById('tinfo').value;
+function publishTournament(){
+let t={
+name:document.getElementById('name').value,
+cat:document.getElementById('category').value,
+info:document.getElementById('info').value
+};
 
- let el=document.createElement('div');
- el.className='card fade-in';
- el.innerHTML=`<h3>${name}</h3><p>${info}</p>`;
+tournaments.push(t);
+renderTournaments();
+}
 
- if(cat==='Active') document.getElementById('active').appendChild(el);
- if(cat==='Coming') document.getElementById('coming').appendChild(el);
- if(cat==='Past') document.getElementById('past').appendChild(el);
+function renderTournaments(){
+let list=document.getElementById('tourneyList');
+list.innerHTML='';
+
+if(tournaments.length===0){
+document.getElementById('empty').style.display='block';
+return;
+}
+
+document.getElementById('empty').style.display='none';
+
+tournaments.forEach(t=>{
+let el=document.createElement('div');
+el.className='card';
+el.innerHTML=`<h3>${t.name}</h3><p>${t.cat}</p><p>${t.info}</p>`;
+list.appendChild(el);
+});
 }
 
 function loadLeaderboard(){
- let list=document.getElementById('leaderboardList');
- list.innerHTML='';
- leaderboard.forEach(p=>{
-   let el=document.createElement('div');
-   el.className='card';
-   el.innerText=`${p.name} - ${p.points} pts`;
-   list.appendChild(el);
- });
+let list=document.getElementById('leaderboardList');
+leaderboard.forEach(p=>{
+let el=document.createElement('div');
+el.className='card';
+el.innerText=`${p.name} - ${p.points}`;
+list.appendChild(el);
+});
 }
 
 function searchLeaderboard(val){
- let list=document.getElementById('leaderboardList');
- list.innerHTML='';
- leaderboard.filter(p=>p.name.toLowerCase().includes(val.toLowerCase()))
- .forEach(p=>{
-   let el=document.createElement('div');
-   el.className='card';
-   el.innerText=`${p.name} - ${p.points} pts`;
-   list.appendChild(el);
- });
+let list=document.getElementById('leaderboardList');
+list.innerHTML='';
+leaderboard.filter(p=>p.name.toLowerCase().includes(val.toLowerCase()))
+.forEach(p=>{
+let el=document.createElement('div');
+el.className='card';
+el.innerText=`${p.name} - ${p.points}`;
+list.appendChild(el);
+});
 }
 
 loadLeaderboard();
